@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+set -x PATH /Users/fliu/Documents/mx $PATH
+export JAVA_HOME=/Users/fliu/Downloads/openjdk1.8.0_222-jvmci-19.2-b02/Contents/Home
+
+# run the UI
+# bin/idealgraphvisualizer
+
+mx -v vm -XX:+UseJVMCICompiler -Dgraal.Dump=  -cp out:/usr/local/Cellar/dotty/0.17.0-RC1/lib/scala-library-2.12.8.jar:/usr/local/Cellar/dotty/0.17.0-RC1/lib/dotty-library_0.17-0.17.0-RC1.jar Test
