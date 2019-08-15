@@ -50,7 +50,7 @@ class Waiting extends LazyControl {
 }
 
 class C {
-  val x_offset = LazyRuntime.fieldOffset(classOf[C], "_x")
+  final val x_offset = LazyRuntime.fieldOffset(classOf[C], "_x")
 
   @volatile private[this] var _x: AnyRef = _
 
