@@ -88,8 +88,18 @@ class C {
 }
 
 object Test {
-  def main(args: Array[String]): Unit = {
+  def loop(): Long = {
     val c = new C
-    while(true) c.x
+    var i = 0
+    var sum = 0L
+    while (i < 10) {
+      sum += c.x.length
+      i += 1
+    }
+    sum
+  }
+
+  def main(args: Array[String]): Unit = {
+    while(true) if (loop() == 0) sys.exit()
   }
 }
