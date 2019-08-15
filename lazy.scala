@@ -1,4 +1,5 @@
 import sun.misc.Unsafe._
+import scala.annotation.tailrec
 
 object LazyRuntime {
   val Evaluating = new LazyControl()
@@ -32,11 +33,6 @@ object LazyRuntime {
       unsafe.compareAndSwapObject(base, offset, Evaluating, new Waiting)
 }
 
-object C {
-  import LazyRuntime.fieldOffset
-  val x_offset = fieldOffset(classOf[C], "_x")
-}
-
 class LazyControl
 
 class Waiting extends LazyControl {
@@ -54,6 +50,8 @@ class Waiting extends LazyControl {
 }
 
 class C {
+  val x_offset = LazyRuntime.fieldOffset(classOf[C], "_x")
+
   @volatile private[this] var _x: AnyRef = _
 
   def x: String = {
@@ -64,15 +62,16 @@ class C {
       x$lzy
   }
 
-  def x$lzy: String = {
+  @tailrec
+  private def x$lzy: String = {
     val current = _x
     if (current.isInstanceOf[String])
       current.asInstanceOf[String]
     else {
-      val offset = C.x_offset
+      val offset = x_offset
       if (current == null) {
         if (LazyRuntime.isUnitialized(this, offset)) {
-          try LazyRuntime.initialize(this, offset, 3 + "value")
+          try LazyRuntime.initialize(this, offset, "value")
           catch {
             case ex: Throwable =>
               LazyRuntime.initialize(this, offset, null)
