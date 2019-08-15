@@ -4,9 +4,9 @@
   :END:
 
 
-Note: **all the graphs are outdated and not in sync with the code file**.
+Note: *all the graphs are outdated and not in sync with the code file*.
 
-You need to use _idealgraphvisualizer_ to open `data.bgv` to visualize the graphs.
+You need to use /Ideal Graph Visualizer/ to open the file ~data.bgv~ to visualize the graphs.
 
 ** Code
    :PROPERTIES:
