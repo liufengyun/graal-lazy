@@ -1,3 +1,5 @@
+package lazyVal
+
 import sun.misc.Unsafe._
 import scala.annotation.tailrec
 

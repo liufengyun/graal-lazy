@@ -1,9 +1,16 @@
 #! /usr/bin/env bash
 
-set -x PATH /Users/fliu/Documents/mx $PATH
-export JAVA_HOME=/Users/fliu/Downloads/openjdk1.8.0_222-jvmci-19.2-b02/Contents/Home
+OPENJDK=/Users/fliu/Downloads/openjdk1.8.0_222-jvmci-19.2-b02
+MIX=/Users/fliu/Documents/mx
 
-# run the UI
-# bin/idealgraphvisualizer
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-mx -v vm -XX:+UseJVMCICompiler -Dgraal.MethodFilter=Test\$.loop -Dgraal.Dump=  -cp /Users/fliu/Documents/lazy-bench:/usr/local/Cellar/dotty/0.17.0-RC1/lib/scala-library-2.12.8.jar:/usr/local/Cellar/dotty/0.17.0-RC1/lib/dotty-library_0.17-0.17.0-RC1.jar Test
+LIB=$DIR/dotty/lib
+LIBS=$LIB/scala-library-2.12.8.jar:$LIB/dotty-library_0.17-0.17.0-RC1.jar 
+
+export PATH=$MIX:$PATH
+export JAVA_HOME=$OPENJDK/Contents/Home
+
+$DIR/dotty/bin/dotc $DIR/lazy.scala
+
+mx -v vm -XX:+UseJVMCICompiler -Dgraal.MethodFilter=lazyVal.*.* -Dgraal.Dump=  -cp $DIR:$LIBS lazyVal.Test
