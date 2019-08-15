@@ -56,8 +56,8 @@ Here are the graphs for the method `C.x`.
 
 3 after mid tier
 
-![](./images/3-mid-tier.png)
+![](./images/3-after-mid-tier.png)
 
 4 after low tier
 
-![](./images/0-after-low-tier.png)
+![](./images/4-after-low-tier.png)
