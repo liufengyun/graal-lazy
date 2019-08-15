@@ -92,7 +92,7 @@ object Test {
     val c = new C
     var i = 0
     var sum = 0L
-    while (i < 10) {
+    while (i < 200) {
       sum += c.x.length
       i += 1
     }
