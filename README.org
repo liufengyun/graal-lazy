@@ -3,6 +3,11 @@
   :CUSTOM_ID: graal-compilation-of-lazy-val
   :END:
 
+
+Note: **all the graphs are outdated and not in sync with the code file**.
+
+You need to use _idealgraphvisualizer_ to open `data.bgv` to visualize the graphs.
+
 ** Code
    :PROPERTIES:
    :CUSTOM_ID: code
