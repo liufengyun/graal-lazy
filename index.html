@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-08-15 Thu 11:10 -->
+<!-- 2019-08-15 Thu 12:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -236,19 +236,20 @@ for the JavaScript code in this tag.
 <li><a href="#graal-compilation-of-lazy-val">1. Graal compilation of Lazy Val</a>
 <ul>
 <li><a href="#code">1.1. Code</a></li>
-<li><a href="#graphs">1.2. Graphs</a></li>
+<li><a href="#graphs">1.2. Graphs for <code>C.x</code></a></li>
+<li><a href="#org295ef99">1.3. Graphs for <code>Test.main</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfb8cb21" class="outline-2">
-<h2 id="graal-compilation-of-lazy-val"><a id="orgfb8cb21"></a><span class="section-number-2">1</span> Graal compilation of Lazy Val</h2>
+<div id="outline-container-org8fa7970" class="outline-2">
+<h2 id="graal-compilation-of-lazy-val"><a id="org8fa7970"></a><span class="section-number-2">1</span> Graal compilation of Lazy Val</h2>
 <div class="outline-text-2" id="text-graal-compilation-of-lazy-val">
 </div>
 
-<div id="outline-container-orgd2ec0dd" class="outline-3">
-<h3 id="code"><a id="orgd2ec0dd"></a><span class="section-number-3">1.1</span> Code</h3>
+<div id="outline-container-org779ee47" class="outline-3">
+<h3 id="code"><a id="org779ee47"></a><span class="section-number-3">1.1</span> Code</h3>
 <div class="outline-text-3" id="text-code">
 <p>
 For more detailed code, see <a href="./lazy.scala">lazy.scala</a>:
@@ -290,8 +291,8 @@ class C {
 </div>
 </div>
 
-<div id="outline-container-orgff07286" class="outline-3">
-<h3 id="graphs"><a id="orgff07286"></a><span class="section-number-3">1.2</span> Graphs</h3>
+<div id="outline-container-orgb18d0e7" class="outline-3">
+<h3 id="graphs"><a id="orgb18d0e7"></a><span class="section-number-3">1.2</span> Graphs for <code>C.x</code></h3>
 <div class="outline-text-3" id="text-graphs">
 <p>
 Here are the graphs for the method <code>C.x</code>.
@@ -348,11 +349,75 @@ Here are the graphs for the method <code>C.x</code>.
 </div>
 </div>
 </div>
+
+<div id="outline-container-org295ef99" class="outline-3">
+<h3 id="org295ef99"><span class="section-number-3">1.3</span> Graphs for <code>Test.main</code></h3>
+<div class="outline-text-3" id="text-1-3">
+<pre class="example">
+object Test {
+  def main(args: Array[String]): Unit = {
+    val c = new C
+    while(true) c.x
+  }
+}
+</pre>
+
+<p>
+0 after parsing
+</p>
+
+
+<div class="figure">
+<p><img src="./images/0-after-parsing-main.png" alt="0-after-parsing-main.png" />
+</p>
+</div>
+
+<p>
+1 before phase lowering
+</p>
+
+
+<div class="figure">
+<p><img src="./images/1-before-phase-lowering-main.png" alt="1-before-phase-lowering-main.png" />
+</p>
+</div>
+
+<p>
+2 after high tier
+</p>
+
+
+<div class="figure">
+<p><img src="./images/2-after-high-tier-main.png" alt="2-after-high-tier-main.png" />
+</p>
+</div>
+
+<p>
+3 after mid tier
+</p>
+
+
+<div class="figure">
+<p><img src="./images/3-after-mid-tier-main.png" alt="3-after-mid-tier-main.png" />
+</p>
+</div>
+
+<p>
+4 after low tier
+</p>
+
+
+<div class="figure">
+<p><img src="./images/4-after-lower-tier-main.png" alt="4-after-lower-tier-main.png" />
+</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fengyun Liu</p>
-<p class="date">Created: 2019-08-15 Thu 11:10</p>
+<p class="date">Created: 2019-08-15 Thu 12:32</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -44,7 +44,7 @@ For more detailed code, see [[./lazy.scala][lazy.scala]]:
     }
 #+END_EXAMPLE
 
-** Graphs
+** Graphs for ~C.x~
    :PROPERTIES:
    :CUSTOM_ID: graphs
    :END:
@@ -70,3 +70,34 @@ Here are the graphs for the method =C.x=.
 4 after low tier
 
 [[./images/4-after-low-tier.png]]
+
+** Graphs for ~Test.main~
+
+#+BEGIN_SRC
+object Test {
+  def main(args: Array[String]): Unit = {
+    val c = new C
+    while(true) c.x
+  }
+}
+#+END_SRC
+
+0 after parsing
+
+[[./images/0-after-parsing-main.png]]
+
+1 before phase lowering
+
+[[./images/1-before-phase-lowering-main.png]]
+
+2 after high tier
+
+[[./images/2-after-high-tier-main.png]]
+
+3 after mid tier
+
+[[./images/3-after-mid-tier-main.png]]
+
+4 after low tier
+
+[[./images/4-after-lower-tier-main.png]]
